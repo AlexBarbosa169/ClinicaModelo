@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model
+namespace App\Model;
 
 /**
  * @Entity
@@ -9,12 +9,14 @@ namespace App\Model
 
 class Exame
 {
-	/**
- 	* @Id
- 	* @Columm(name='tipoExame')
- 	*/
-	private $descricaoExame;	
+ 	/**
+     * @Id
+     * @Column(name="tipoExame",type="integer")
+     * GenerateValue(strategy="AUTO")
+     */
 	private $tipoExame;
+	/** @Column(name="descricaoExame") */	
+	private $descricaoExame;	
 
 	public function getDescricao()
 	{

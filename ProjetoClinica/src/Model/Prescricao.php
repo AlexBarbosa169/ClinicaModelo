@@ -1,22 +1,41 @@
 <?php
 
-namespace App\Model
+namespace App\Model;
 
 /**
  * @Entity
  * @Table(name="prescricao")
  */
 
-class Precricao
-{
-	/**
- 	* @Id
- 	* @Columm(name='codPrescricao')
- 	*/
+
+class Prescricao
+{	
+ 	/**
+     * @Id
+     * @Column(name="codPrescricao",type="integer")
+     * GenerateValue(strategy="AUTO")
+     */
 	private $codPrescricao;	
+	/** @Column(name="codConsulta") */
+	/**
+     * Uma consulta possui apenas uma prescricao
+     * @OneToOne(targetEntity="Consulta")
+     * @JoinColumn(name=codConsulta, referencedColumnName="codConsulta")
+     */
 	private $consulta;
+	/** @Column(name="codExame") */
+	/**
+     * One Product has Many Features
+     * @OneToMany(targetEntity="Exame", mappedBy="tipoExame")
+     */
 	private $exame;
+	/** @Column(name="codMedicamento") */
+	/**
+     * One Product has Many Features.
+     * @OneToMany(targetEntity="Medicamento", mappedBy="cod_medicamento")
+     */
 	private $medicamento;
+	/** @Column(name="Comentario") */
 	private $comentario;
 
 	public function getPrescricao()
@@ -33,6 +52,9 @@ class Precricao
 		return $this->consulta;
 	}
 
+	public function setConsulta($p_consulta){
+		$this->consulta = $p_consulta;
+	}
 	public function setExame($p_exame){
 		$this->exame = $p_exame;
 	}
@@ -49,7 +71,7 @@ class Precricao
 		return $this->comentario;
 	}
 
-	public function setExame($p_comentario){
+	public function setComentario($p_comentario){
 		$this->exame = $p_comentario;
 	}
 

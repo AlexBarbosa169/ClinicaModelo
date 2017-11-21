@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model
+namespace App\Model;
 
 /**
  * @Entity
@@ -8,18 +8,33 @@ namespace App\Model
  */
 
 class Consulta
-{
-	/**
- 	* @Id
- 	* @Columm(name='codConsulta')
- 	*/
+{	
+ 	/**
+     * @Id
+     * @Column(name="codConsulta",type="integer")
+     * GenerateValue(strategy="AUTO")
+     */
 	private $codConsulta;
+	/** @Column(name="codPaciente") */
+	/**
+     * Many Consultas have One Paciente.
+     * @ManyToOne(targetEntity="Paciente", inversedBy="consultas" )
+     * @JoinColumn(name="codPaciente", referencedColumnName="CodPaciente")
+     */
 	private $Paciente;
+	/** @Column(name="crmMedico") */
+	/**
+     * Many Consultas have One Medico.
+     * @ManyToOne(targetEntity="Medico", inversedBy="consultas")
+     * @JoinColumn(name="crmMedico", referencedColumnName="CRM")
+     */
 	private $Medico;
+	/** @Column(name="dataConsulta") */
 	private $dataConsulta;
+	/** @Column(name="descricaoConsulta") */
 	private $descricaoConsulta;
 
-	function getCondulta(){
+	function getConsulta(){
 		return $this->codConsulta;
 	}
 	
@@ -49,6 +64,8 @@ class Consulta
 
 	function setMedico($c_medico){
 		$this->Medico = $c_medico;
+//		Teste para adicionar consultas ao médico
+		$c_medico->setConsulta($this);
 	}	
 
 	function setDataConsulta($c_data){

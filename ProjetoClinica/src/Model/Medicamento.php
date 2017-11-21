@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model
+namespace App\Model;
 
 /**
  * @Entity
@@ -8,13 +8,16 @@ namespace App\Model
  */
 
 class Medicamento
-{
-	/**
- 	* @Id
- 	* @Columm(name='cod_medicamento')
- 	*/
+{	
+ 	/**
+     * @Id
+     * @Column(name="cod_medicamento",type="integer")
+     * GenerateValue(strategy="AUTO")
+     */
 	private $cod_medicamento;
+	/** @Column(name="Nome") */
 	private $descricao;
+	/** @Column(name="Descricao") */
 	private $nome;
 
 	function getCodMedicamento(){

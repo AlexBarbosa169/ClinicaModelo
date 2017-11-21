@@ -1,25 +1,36 @@
 <?php
 
-namespace App\Model
+namespace App\Model;
 
 /**
  * @Entity
  * @Table(name="paciente")
  */
 
-class Paciente
-{
-	/**
- 	* @Id
- 	* @Columm(name='CodPaciente')
- 	*/
+class Paciente {	
+ 	/**
+     * @Id
+     * @Column(name="CodPaciente",type="integer")
+     * GenerateValue(strategy="AUTO")
+     */
 	private $codPaciente;
+	/** @Column(name="Convenio") */
 	private $convenio;
+	/** @Column(name="CPF") */
 	private $cpf;
+	/** @Column(name="DataNasc") */
 	private $dataNasc;
+	/** @Column(name="Nome") */
 	private $nome;
+	/** @Column(name="Telefone") */
 	private $telefone;
+	/** @Column(name="TipoSanguineo") */
 	private $tipoSanguineo;
+	/**
+	 * Um paciente tem muitas Consultas
+     * @OneToMany(targetEntity="Consulta", mappedBy="Consulta" )
+     */
+	private $consultas;
 
 	function getCodPaciente(){
 		return $this->codPaciente;
@@ -45,6 +56,10 @@ class Paciente
 		return $this->telefone;
 	}
 
+	function getTiposanguineo(){
+		return $this->tipoSanguineo;
+	}
+
 	function setCodPaciente($cod_paciente){
 		$this->codPaciente = $cod_paciente;
 	}
@@ -53,7 +68,7 @@ class Paciente
 		$this->convenio = $p_convenio;
 	}
 
-	function getCpf($p_cpf){
+	function setCpf($p_cpf){
 		$this->cpf = $p_cpf;
 	}
 
@@ -65,10 +80,14 @@ class Paciente
 		$this->nome = $p_nome;
 	}
 
-	function getTelefone($p_telefone){
+	function setTelefone($p_telefone){
 		$this->telefone = $p_telefone;
+	}
+
+	function setTiposanguineo($p_tipoSanguineo){
+		$this->tipoSanguineo = $p_tipoSanguineo;
 	}
 
 }
 
-  ?>
+  
